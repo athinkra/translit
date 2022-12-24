@@ -1,3 +1,8 @@
+# Local
+.idea/
+notes/
+*/.notes/*
+
 # Swap
 [._]*.s[a-v][a-z]
 !*.svg  # comment out if you don't need vector files
@@ -17,6 +22,19 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
 
 *~
 
@@ -256,6 +274,19 @@ $RECYCLE.BIN/
 *.msp
 *.txz
 
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -279,4 +310,4 @@ ipython_config.py
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
 
-# End of https://mrkandreev.name/snippets/gitignore-generator/#Vim,Linux,macOS,Python,Windows,Archives,VisualStudioCode,JupyterNotebooks
+# End of https://mrkandreev.name/snippets/gitignore-generator/#Vim,venv,Linux,macOS,Python,Windows,Archives,VirtualEnv,VisualStudioCode,JupyterNotebooks
