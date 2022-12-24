@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+from icu import Transliterator, UTransDirection
+import argparse
+
+# Available transforms
+def available_transforms(term = None):
+    available = list(Transliterator.getAvailableIDs())
+    if term is None:
+        return available
+    return [x for x in available if term.lower() in x.lower()]
+
+# transliterate from inbuilt ICU transform
+def translit_icu(text, transform):
+    if transform not in available_transforms():
+        print("Unsupported transformation")
+        exit()
+    transformer = Transliterator.createInstance(transform)
+    print(transformer.transliterate(text))
+
+# TODO:
+# read transform rules (and name) from LDML file, including reverse,
+# then pass to translit_rules
+
+
+# transform from custom rules
+def translit_rules(text, rules, direction, name="Custom"):
+    transformer = Transliterator.createFromRules(name, rules, direction)
+    print(transformer.transliterate(text))
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Transliterate strings')
+    # List all supported transforms
+    parser.add_argument('-l', '--list', action="store_true", required=False, help='List all supported transformations.')
+    # Search supported transformations
+    parser.add_argument('-s', '--search', type=str, required=False, help='Search supported transformations.')
+    # String to be transformed
+    parser.add_argument('-i', '--input', type=str, required=False, help='String to be transformed.')
+    # Transformation to be applied to input
+    parser.add_argument('-t', '--transform', type=str, required=False, help='Transformation to be applied to input.')
+    # Custom transformation rules to be applied to input
+    parser.add_argument('-c', '--custom', type=str, required=False, help='Custom transformation rules to be applied to input.')
+    # Read transformation rules from LDML file
+    parser.add_argument('-r', '--rules', type=str, required=False, help='Read transformation rules from LDML file.')
+    parser.add_argument('-rev', '--reverse', action="store_true", required=False, help='List all supported transformations.')
+    # Search supported transformations
+    
+    args = parser.parse_args()
+
+    direction = UTransDirection.FORWARD
+    if args.reverse:
+        direction = UTransDirection.REVERSE
+
+    if args.list:
+        print(*available_transforms(), sep = ", ")
+        exit()
+    if args.search:
+        print(*available_transforms(args.search), sep = ", ")
+        exit()
+    if not args.input:
+        print("Require input string to transform.")
+        exit()
+    if not (args.transform or args.custom or args.rules):
+        print("Require transformation to be specified.")
+        exit()
+    if args.transform:
+        translit_icu(args.input, args.transform)
+    if args.custom:
+        translit_rules(args.input, args.custom, direction)
+
+if __name__ == '__main__':
+    main()
+
+# :: NFD ;
+# :: lower ;
+# :: latin-greek ;
+# :: any-hex;
+

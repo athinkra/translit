@@ -1,0 +1,7 @@
+el-internationalisation @ git+https://github.com/enabling-languages/el_internationalisation.git@4a64852ec90c2208ee93c359813c615385e75906
+el-utilities @ git+https://github.com/enabling-languages/el_utilities.git@d1547dc6f92ec699471e630eec5b475528e5ef87
+PyICU==2.10.2
+pyuegc==15.0.0
+regex==2022.10.31
+unicodedataplus==15.0.0.post1
+uniseg==0.7.2
