@@ -1,18 +1,42 @@
 # Translit
 
 ```
-usage: translit.py [-h] [-l] [-s SEARCH] [-i INPUT] [-t TRANSFORM] [-c CUSTOM] [-r RULES]
+usage: translit [-h] [-l] [-s SEARCH] [-i INPUT] [-t TRANSFORM] [-c CUSTOM] [-r RULES] [-rev]
 
 Transliterate strings
 
 Options:
-  -h, --help                            Show this help message and exit
-  -l, --list                            List all supported transformations.
-  -s SEARCH, --search SEARCH            Search supported transformations.
-  -i INPUT, --input INPUT               String to be transformed.
-  -t TRANSFORM, --transform TRANSFORM   Transformation to be applied to input.
-  -c CUSTOM, --custom CUSTOM            Custom transformation rules to be applied to input.
-  -r RULES, --rules RULES               Read transformation rules from LDML file.
+  -h, --help                          Show this help message and exit
+  -l, --list                          List all ICU supported transformations.
+  -s SEARCH, --search SEARCH          Search supported transformations.
+  -i INPUT, --input INPUT             String to be transformed.
+  -t TRANSFORM, --transform TRANSFORM Transformation to be applied to input.
+  -c CUSTOM, --custom CUSTOM          Custom transformation rules to be applied to input.
+  -r RULES, --rules RULES             Read transformation rules from LDML file.
+  -rev, --reverse                     List all supported transformations.
+```
+
+## Listing transforms available in ICU
+
+You can list all available ICU transforms:
+
+```bash
+$ ./translit -l
+```
+
+### Targeted listing
+
+It is possible to filter the list by matching a substring:
+
+```bash
+$ ./translit -s=<substring>
+```
+
+For example:
+
+```bash
+$ ./translit -s="alaloc"
+Ethi-Latn/ALALOC, Ethiopic-Latin/ALALOC, Latin-Ethiopic/ALALOC, Latn-Ethi/ALALOC, Any-Ethiopic/ALALOC
 ```
 
 ## Transformations provided with ICU
@@ -45,6 +69,4 @@ $ ./translit -i="Thuɔŋjäŋ" -c=":: Lower; :: NFD; :: [:Mn:] Remove;"
 thuɔŋjaŋ
 ```
 
-## Reading rules form LDML file
-
-
+## Reading rules from LDML file

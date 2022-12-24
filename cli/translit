@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from icu import Transliterator, UTransDirection
-import argparse
 
 # Available transforms
 def available_transforms(term = None):
@@ -30,9 +29,10 @@ def translit_rules(text, rules, direction, name="Custom"):
 
 
 def main():
+    import argparse
     parser = argparse.ArgumentParser(description='Transliterate strings')
     # List all supported transforms
-    parser.add_argument('-l', '--list', action="store_true", required=False, help='List all supported transformations.')
+    parser.add_argument('-l', '--list', action="store_true", required=False, help='List all ICU supported transformations.')
     # Search supported transformations
     parser.add_argument('-s', '--search', type=str, required=False, help='Search supported transformations.')
     # String to be transformed
@@ -45,7 +45,7 @@ def main():
     parser.add_argument('-r', '--rules', type=str, required=False, help='Read transformation rules from LDML file.')
     parser.add_argument('-rev', '--reverse', action="store_true", required=False, help='List all supported transformations.')
     # Search supported transformations
-    
+
     args = parser.parse_args()
 
     direction = UTransDirection.FORWARD
