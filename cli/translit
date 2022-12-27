@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from icu import Transliterator, UTransDirection
+from pathlib import Path
+import regex as re
 
 # Available transforms
 def available_transforms(term = None):
@@ -17,16 +19,29 @@ def translit_icu(text, transform):
     transformer = Transliterator.createInstance(transform)
     print(transformer.transliterate(text))
 
-# TODO:
-# read transform rules (and name) from LDML file, including reverse,
-# then pass to translit_rules
-
+# READ transliteration rules from LDML file
+# eg ldml/din-Latn-unified-t-din-Latin-standard.xml
+def read_ldml_rules(ldml_file):
+    import xml.etree.ElementTree as ET
+    def get_ldml_rules(rules_file):
+        rules = ''
+        doc = ET.parse(rules_file)
+        r = doc.find('./supplementalData/transforms/transform')
+        if r is None:
+            r = doc.find('./transforms/transform')
+        if r is None:
+            sys.stderr(f"Can't find transform in {rules_file}")
+        pattern = re.compile(r'[ \t]{2,}|[ ]*#.+\n')
+        rules = re.sub(pattern, '', r.find('./tRule').text)
+        rules_name = r.attrib['alias'].split()[0]
+        return (rules, rules_name)
+    rules_tuple = get_ldml_rules(ldml_file)
+    return rules_tuple
 
 # transform from custom rules
 def translit_rules(text, rules, direction, name="Custom"):
     transformer = Transliterator.createFromRules(name, rules, direction)
     print(transformer.transliterate(text))
-
 
 def main():
     import argparse
@@ -39,12 +54,12 @@ def main():
     parser.add_argument('-i', '--input', type=str, required=False, help='String to be transformed.')
     # Transformation to be applied to input
     parser.add_argument('-t', '--transform', type=str, required=False, help='Transformation to be applied to input.')
-    # Custom transformation rules to be applied to input
-    parser.add_argument('-c', '--custom', type=str, required=False, help='Custom transformation rules to be applied to input.')
     # Read transformation rules from LDML file
     parser.add_argument('-r', '--rules', type=str, required=False, help='Read transformation rules from LDML file.')
+    # Custom transformation rules to be applied to input
+    parser.add_argument('-c', '--custom', type=str, required=False, help='Custom transformation rules to be applied to input.')
+    # Reverse direction of transformation
     parser.add_argument('-rev', '--reverse', action="store_true", required=False, help='List all supported transformations.')
-    # Search supported transformations
 
     args = parser.parse_args()
 
@@ -66,6 +81,23 @@ def main():
         exit()
     if args.transform:
         translit_icu(args.input, args.transform)
+    if args.rules:
+        p = Path(args.rules)
+        try:
+            p = p.resolve(strict=True)
+        except FileNotFoundError:
+            print("LDML file not found.")
+            exit()
+        if p.exists() and p.is_file():
+            ldml_rules = read_ldml_rules(str(p))
+            if args.custom:
+                ldml_transformer = Transliterator.createFromRules(ldml_rules[1], ldml_rules[0], direction)
+                Transliterator.registerInstance(ldml_transformer)
+                # print(*available_transforms(term=ldml_rules[1]), sep = ", ")
+                # translit_icu(args.input, ldml_rules[1])
+            else:
+                translit_rules(args.input, ldml_rules[0], direction)
+            # ldml_rules = read_ldml_rules(str(p))
     if args.custom:
         translit_rules(args.input, args.custom, direction)
 
@@ -76,4 +108,11 @@ if __name__ == '__main__':
 # :: lower ;
 # :: latin-greek ;
 # :: any-hex;
+
+# https://unicode-org.github.io/icu-docs/apidoc/dev/icu4c/classicu_1_1Transliterator.html
+
+# createInstance
+# createFromRules
+# registerInstance
+# unregister
 

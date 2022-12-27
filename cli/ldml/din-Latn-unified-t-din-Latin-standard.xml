@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE supplementalData SYSTEM "../../common/dtd/ldmlSupplemental.dtd">
+<supplementalData>
+	<version number="$Revision$"/>
+	<transforms>
+		<transform source="dinkaUnified" target="dinkaStandard" direction="forward" draft="contributed" alias="dinkaUnified-dinkaStandard din-Latn-unified-t-din-Latin-standard.xml">
+		<!-- The transform described in prose:
+		  This is a conversion from Ethiopic script (Unicode 3.0 level) to Latin script, and the reversal.
+                  The conversion uses the convention (or "variant") in use by the journal Aethiopica.
+		-->
+			<tRule><![CDATA[
+:: NFD;
+\u0301 > ;
+\u0302 > \u0308;
+:: NFC;
+            ]]></tRule>
+		</transform>
+	</transforms>
+</supplementalData>
