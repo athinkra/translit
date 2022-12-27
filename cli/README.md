@@ -13,7 +13,7 @@ Options:
   -t TRANSFORM, --transform TRANSFORM Transformation to be applied to input.
   -r RULES, --rules RULES             Read transformation rules from LDML file.
   -c CUSTOM, --custom CUSTOM          Custom transformation rules to be applied to input.
-  -rev, --reverse                     List all supported transformations.
+  -rev, --reverse                     Use the reverse direction for transformation.
 ```
 
 ## Listing transforms available in ICU

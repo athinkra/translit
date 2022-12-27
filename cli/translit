@@ -60,7 +60,7 @@ def main():
     # Custom transformation rules to be applied to input
     parser.add_argument('-c', '--custom', type=str, required=False, help='Custom transformation rules to be applied to input.')
     # Reverse direction of transformation
-    parser.add_argument('-rev', '--reverse', action="store_true", required=False, help='List all supported transformations.')
+    parser.add_argument('-rev', '--reverse', action="store_true", required=False, help='Use the reverse direction for transformation')
 
     args = parser.parse_args()
 
