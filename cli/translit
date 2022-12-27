@@ -3,6 +3,7 @@
 from icu import Transliterator, UTransDirection
 from pathlib import Path
 import regex as re
+import sys
 
 # Available transforms
 def available_transforms(term = None):
@@ -15,7 +16,7 @@ def available_transforms(term = None):
 def translit_icu(text, transform):
     if transform not in available_transforms():
         print("Unsupported transformation")
-        exit()
+        sys.exit()
     transformer = Transliterator.createInstance(transform)
     print(transformer.transliterate(text))
 
@@ -69,16 +70,16 @@ def main():
 
     if args.list:
         print(*available_transforms(), sep = ", ")
-        exit()
+        sys.exit()
     if args.search:
         print(*available_transforms(args.search), sep = ", ")
-        exit()
+        sys.exit()
     if not args.input:
         print("Require input string to transform.")
-        exit()
+        sys.exit()
     if not (args.transform or args.custom or args.rules):
         print("Require transformation to be specified.")
-        exit()
+        sys.exit()
     if args.transform:
         translit_icu(args.input, args.transform)
     if args.rules:
@@ -87,7 +88,7 @@ def main():
             p = p.resolve(strict=True)
         except FileNotFoundError:
             print("LDML file not found.")
-            exit()
+            sys.exit()
         if p.exists() and p.is_file():
             ldml_rules = read_ldml_rules(str(p))
             if args.custom:
