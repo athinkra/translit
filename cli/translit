@@ -15,7 +15,7 @@ def available_transforms(term = None):
 # transliterate from inbuilt ICU transform
 def translit_icu(text, transform):
     if transform not in available_transforms():
-        print("Unsupported transformation")
+        print("Unsupported transformation. Not available in icu4c")
         sys.exit()
     transformer = Transliterator.createInstance(transform)
     print(transformer.transliterate(text))
@@ -104,16 +104,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# :: NFD ;
-# :: lower ;
-# :: latin-greek ;
-# :: any-hex;
-
-# https://unicode-org.github.io/icu-docs/apidoc/dev/icu4c/classicu_1_1Transliterator.html
-
-# createInstance
-# createFromRules
-# registerInstance
-# unregister
-

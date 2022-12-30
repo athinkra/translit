@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE supplementalData SYSTEM "../../common/dtd/ldmlSupplemental.dtd">
+<supplementalData>
+	<version number="$Revision$"/>
+	<transforms>
+		<transform source="Any" target="Sentence" direction="forward" draft="contributed" alias="Any-Sentence und-t-d0-sentence">
+		<!-- The transform described in prose:
+		  This is a conversion from Ethiopic script (Unicode 3.0 level) to Latin script, and the reversal.
+                  The conversion uses the convention (or "variant") in use by the journal Aethiopica.
+		-->
+			<tRule><![CDATA[
+$makeInitial = [[:Zl:]$] ;
+$makeSentenceStart = [\u002E\u003F\u0021\u037E\u2CFE\u0589\U0001E95E\U0001E95F][:Zs:]+ ;
+$makeInitial {([:Ll:])} > &Any-Upper($1);
+$makeSentenceStart {([:Ll:])} > &Any-Upper($1);
+            ]]></tRule>
+		</transform>
+	</transforms>
+</supplementalData>

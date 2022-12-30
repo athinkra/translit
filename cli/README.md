@@ -63,7 +63,7 @@ Specify an input string and transformation rules: `./translit -i=<input_string> 
 
 ```bash
 $ ./translit -i="የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን" -c=":: any-hex;"
-\u12E8\u12A2\u1275\u12EE\u1335\u12EB\u0020\u12A6\u122D\u1276\u12F6\u12AD\u1235\u0020\u1270\u12CB\u1215\u12F6\u0020\u1264\u1270\u0020\u12AD\u122D\u1235\u1272\u12EB\u1295
+\u12E8\u12A2\u1275\u12EE\u1335\u12EB\u0020\u12A6\u122D\u1276\u12F6\u12AD\u1235\u0020\u1270\u12CB\u1215\u12F6\u0020\u1264\u1270\u0020\u12AD\122D\u1235\u1272\u12EB\u1295
 $ ./translit -i="የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን" -c=":: any-hex; '\u0020' > ' ';"
 \u12E8\u12A2\u1275\u12EE\u1335\u12EB \u12A6\u122D\u1276\u12F6\u12AD\u1235 \u1270\u12CB\u1215\u12F6 \u1264\u1270 \u12AD\u122D\u1235\u1272\u12EB\u1295
 $ ./translit -i="የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን" -c=":: any-hex; '\u' > ' U+';"
@@ -102,4 +102,9 @@ It is also possible to read in a set of rules from an LDML file and use that tra
 $ ./translit -i="Yeŋu luêêl yïn ye an ee nyankui?" -r='ldml/din-Latn-unified-t-din-Latin-standard.xml' \
     -c=":: dinkaUnified-dinkaStandard ; :: Title; :: NFD;"
 Yeŋu Luëël Yïn Ye An Ee Nyankui?
+$ ./translit -i="ነገር ግን የባሪያን መልክ ይዞ በሰውም ምሳሌ ሆኖ ራሱን ባዶ አደረገ፥" -r="ldml/Any-Sentence.xml" -c=":: Ethiopic-Latin/ALALOC; :: Any-Sentence; :: [[:Ethiopic:] & [:P:]] Remove; "
+Nagar gen yabāriyān malek yezo basawem mesālé hono rāsun bādo adaraga
+$ ./translit -i="ነገር ግን የባሪያን መልክ ይዞ በሰውም ምሳሌ ሆኖ ራሱን ባዶ አደረገ፥" -r="ldml/Any-Sentence.xml" -c=":: Ethiopic-Latin/ALALOC; :: Title ; :: [[:Ethiopic:] & [:P:]] Remove; "
+Nagar Gen Yabāriyān Malek Yezo Basawem Mesālé Hono Rāsun Bādo Adaraga
 ```
+

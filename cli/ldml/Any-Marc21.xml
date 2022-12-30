@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE supplementalData SYSTEM "../../common/dtd/ldmlSupplemental.dtd">
+<supplementalData>
+	<version number="$Revision$"/>
+	<transforms>
+		<transform source="Any" target="Marc21" direction="forward" draft="contributed" alias="Any-Marc21 und-t-d0-marc21">
+		<!-- The transform described in prose:
+		  This is a conversion from Ethiopic script (Unicode 3.0 level) to Latin script, and the reversal.
+                  The conversion uses the convention (or "variant") in use by the journal Aethiopica.
+		-->
+			<tRule><![CDATA[
+:: NFD ;
+:: [[oOuU][\u031B]] NFC ;
+:: [[\u040C\u0413\u0433\u045C][\u0301]] NFC ;
+:: [[\u040E\u0419\u045E\u0439][\u0306]] NFC ;
+:: [[\u0406\u0415\u0435\u0456][\u0308]] NFC ;
+:: [[\u0627][\u0653\u0654\u0655]] NFC ;
+:: [[\u0648\u064A][\u0654]] NFC ;
+            ]]></tRule>
+		</transform>
+	</transforms>
+</supplementalData>
