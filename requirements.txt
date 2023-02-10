@@ -1,7 +1,33 @@
+altgraph==0.17.3
+appdirs==1.4.4
+bottle==0.12.23
+bottle-websocket==0.2.9
+Eel==0.15.1
 el-internationalisation @ git+https://github.com/enabling-languages/el_internationalisation.git@4a64852ec90c2208ee93c359813c615385e75906
-el-utilities @ git+https://github.com/enabling-languages/el_utilities.git@d1547dc6f92ec699471e630eec5b475528e5ef87
+el-utilities @ git+https://github.com/enabling-languages/el_utilities.git@1e1ce8171f4f84ed06e57b8edd985aded264b38c
+future==0.18.2
+gevent==22.10.2
+gevent-websocket==0.10.1
+greenlet==2.0.1
+jedi==0.18.2
+macholib==1.16.2
+mypy==0.991
+mypy-extensions==0.4.3
+parso==0.8.3
+prettytable==3.5.0
+prompt-toolkit==3.0.36
+ptpython==3.0.22
+Pygments==2.13.0
 PyICU==2.10.2
+pyinstaller==5.7.0
+pyinstaller-hooks-contrib==2022.14
+pyparsing==3.0.9
 pyuegc==15.0.0
 regex==2022.10.31
+typing_extensions==4.4.0
 unicodedataplus==15.0.0.post1
 uniseg==0.7.2
+wcwidth==0.2.5
+whichcraft==0.6.1
+zope.event==4.6
+zope.interface==5.5.2
